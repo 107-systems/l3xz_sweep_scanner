@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>l3xz_sweep_scanner</name>
+  <version>1.0.0</version>
+  <description>ROS driver for Scanse Sweep 360° 2D LIDAR.</description>
+
+  <maintainer email="consulting@lxrobotics.com">Alexander Entinger</maintainer>
+
+  <license>Copyright LXRobotics GmbH</license>
+
+  <url type="website">https://107-systems.org/</url>
+  <url type="repository">https://github.com/107-systems/l3xz_sweep_scanner</url>
+
+  <author email="consulting@lxrobotics.com">Alexander Entinger</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+
+  <export></export>
+</package>
