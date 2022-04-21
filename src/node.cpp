@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 
       size_t idx = 0;
       for (auto [angle_milli_deg, distance_cm, signal_strength] : scan.samples) {
-        laser_scan_msg.ranges[idx] = static_cast<float>(distance_mm) / 100.0;
+        laser_scan_msg.ranges[idx] = static_cast<float>(distance_cm) / 100.0;
         idx++;
       }
 
