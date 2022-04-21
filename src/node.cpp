@@ -80,7 +80,7 @@ int main(int argc, char **argv)
       laser_scan_msg.ranges.assign(scan.samples.size(), std::numeric_limits<float>::infinity());
 
       size_t idx = 0;
-      for (auto [angle_milli_deg, distance_mm, signal_strength] : scan.samples) {
+      for (auto [angle_milli_deg, distance_cm, signal_strength] : scan.samples) {
         laser_scan_msg.ranges[idx] = static_cast<float>(distance_mm) / 100.0;
         idx++;
       }
