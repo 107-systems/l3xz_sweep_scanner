@@ -4,13 +4,15 @@
  * Contributors: https://github.com/107-systems/l3xz_teleop/graphs/contributors.
  */
 
-/**************************************************************************************
- * INCLUDE
- **************************************************************************************/
 #ifndef SWEEP_SCANNER_NODE
 #define SWEEP_SCANNER_NODE
 
+/**************************************************************************************
+ * INCLUDE
+ **************************************************************************************/
+
 #include <rclcpp/rclcpp.hpp>
+
 #include <sensor_msgs/msg/laser_scan.hpp>
 
 #include <sweep/sweep.hpp>
@@ -24,7 +26,7 @@
 class SweepScannerNode : public rclcpp::Node
 {
 public:
-   SweepScannerNode();
+    SweepScannerNode();
    ~SweepScannerNode();
 
 private:
@@ -38,4 +40,5 @@ private:
 
   void lidarTimerCallback();
 };
+
 #endif // SWEEP_SCANNER_NODE

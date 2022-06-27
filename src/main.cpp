@@ -26,9 +26,14 @@ int main(int argc, char **argv)
     rclcpp::shutdown();
     return EXIT_SUCCESS;
   }
-  catch(sweep::device_error const & e)
+  catch(std::runtime_error const & e)
   {
     RCLCPP_ERROR(rclcpp::get_logger(node->get_name()), "%s", e.what());
+    return EXIT_FAILURE;
+  }
+  catch(...)
+  {
+    RCLCPP_ERROR(rclcpp::get_logger(node->get_name()), "Unhandled exception caught.");
     return EXIT_FAILURE;
   }
 }

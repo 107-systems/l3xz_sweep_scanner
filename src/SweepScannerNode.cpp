@@ -7,22 +7,22 @@
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
+
 #include <l3xz_sweep_scanner/SweepScannerNode.hpp>
-#include <string>
 
 /**************************************************************************************
  * CTOR/DTOR
  **************************************************************************************/
 
-SweepScannerNode::SweepScannerNode()
-        : Node("l3xz_sweep_scanner")
+SweepScannerNode::SweepScannerNode() try
+: Node("l3xz_sweep_scanner")
 {
   declare_parameter("serial_port", "/dev/ttyUSB0");
   declare_parameter("rotation_speed", 1);
   declare_parameter("sample_rate", 500);
   declare_parameter("frame_id", "laser_frame");
  
-  std::string serial_port = get_parameter("serial_port").as_string();
+  std::string const serial_port = get_parameter("serial_port").as_string();
   _frame_id = get_parameter("frame_id").as_string();
   _rotation_speed = get_parameter("rotation_id").as_int();
   _sample_rate = get_parameter("sample_rate").as_int();
@@ -30,10 +30,13 @@ SweepScannerNode::SweepScannerNode()
   RCLCPP_INFO(get_logger(), "node config:\n  port : %s\n  speed: %d Hz\n  rate : %d Hz\n  frame: %s", serial_port.c_str(), _rotation_speed, _sample_rate, _frame_id.c_str());
 
   _scanner = std::make_shared<sweep::sweep>(serial_port.c_str());
+
   RCLCPP_INFO(get_logger(), "configuring scanse sweep.");
   _scanner->set_motor_speed(_rotation_speed);
+
   while(!_scanner->get_motor_ready())
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
   _scanner->set_sample_rate(_sample_rate);
   _scanner->start_scanning();
 
@@ -41,6 +44,10 @@ SweepScannerNode::SweepScannerNode()
 
   _lidar_pub = create_publisher<sensor_msgs::msg::LaserScan>(_frame_id, 10);
   _lidar_pub_timer = create_wall_timer(std::chrono::milliseconds(1000 / _sample_rate), [this](){this->lidarTimerCallback();});
+}
+catch(sweep::device_error const & e)
+{
+  RCLCPP_ERROR(get_logger(), "%s", e.what());
 }
 
 SweepScannerNode::~SweepScannerNode()
@@ -52,7 +59,7 @@ SweepScannerNode::~SweepScannerNode()
  * PRIVATE MEMBER FUNCTIONS
  **************************************************************************************/
 
-void SweepScannerNode::lidarTimerCallback()
+void SweepScannerNode::lidarTimerCallback() try
 {
   /* Obtain a full scan. */
   sweep::scan const scan = _scanner->get_scan();
@@ -81,4 +88,8 @@ void SweepScannerNode::lidarTimerCallback()
 
   /* Publish the laser scan. */
   _lidar_pub->publish(laser_scan_msg);
+}
+catch(sweep::device_error const & e)
+{
+  RCLCPP_ERROR(get_logger(), "%s", e.what());
 }
