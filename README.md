@@ -20,6 +20,10 @@ rviz2 --display-config src/l3xz_sweep_scanner/rviz/laser.rviz
 ```
 **Note**: Possible you need to configure the right USB port in `launch`/[`laser.launch`](launch/laser.launch).
 
+<p align="center">
+  <img src="doc/img/laser-scan-rviz.png" width="40%">
+</p>
+
 ### Interface Documentation
 #### Published Topics
 | Default Name | Type |
