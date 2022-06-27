@@ -18,7 +18,7 @@ include_directories(
 #######################################################################################
 add_subdirectory(external/libsweep/current)
 add_executable(${L3XZ_SWEEP_SCANNER_TARGET}
-  src/node.cpp
+  src/main.cpp
   src/SweepScannerNode.cpp
 )
 target_link_libraries(${L3XZ_SWEEP_SCANNER_TARGET} sweep)
