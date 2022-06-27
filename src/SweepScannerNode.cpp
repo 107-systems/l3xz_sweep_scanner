@@ -26,7 +26,7 @@ SweepScannerNode::SweepScannerNode() try
  
   std::string const serial_port = get_parameter("serial_port").as_string();
                       _frame_id = get_parameter("frame_id").as_string();
-                _rotation_speed = get_parameter("rotation_id").as_int();
+                _rotation_speed = get_parameter("rotation_speed").as_int();
                    _sample_rate = get_parameter("sample_rate").as_int();
 
   RCLCPP_INFO(get_logger(), "node config:\n  port : %s\n  speed: %d Hz\n  rate : %d Hz\n  frame: %s", serial_port.c_str(), _rotation_speed, _sample_rate, _frame_id.c_str());
