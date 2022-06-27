@@ -24,11 +24,12 @@ rviz2 --display-config src/l3xz/rviz/laser.rviz
 #### Published Topics
 | Default Name | Type |
 |:-:|:-:|
-| `/l3xz/laser_frame` | [`sensor_msgs/LaserScan`](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/LaserScan.html) |
+| `/l3xz/laser` | [`sensor_msgs/LaserScan`](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/LaserScan.html) |
 
 #### Parameters
 | Name | Default | Description |
 |:-:|:-:|-|
+| `topic` | `laser ` | Name of ROS2 topic under which the `sensor_msgs/LaserScan` data is streamed. |
 | `serial_port` | `/dev/ttyUSB0 ` | Serial port under which the Scanse Sweep is connected to the system. |
 | `rotation_speed` | 1-10 | Rotations per second of the sensor head. |
 | `sample_rate ` | 500, 750, 1000 | Laser scan rate in Hz, i.e. 500 = 500 laser distance measurements per second. |

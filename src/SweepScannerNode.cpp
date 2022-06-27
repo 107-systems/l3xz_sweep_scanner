@@ -19,21 +19,25 @@ SweepScannerNode::SweepScannerNode() try
 , _scanner_thread{}
 , _scanner_thread_active{false}
 {
+  declare_parameter("topic", "laser");
   declare_parameter("serial_port", "/dev/ttyUSB0");
   declare_parameter("rotation_speed", 1);
   declare_parameter("sample_rate", 500);
   declare_parameter("frame_id", "laser_frame");
- 
+
+  std::string const topic       = get_parameter("topic").as_string();
   std::string const serial_port = get_parameter("serial_port").as_string();
                       _frame_id = get_parameter("frame_id").as_string();
                 _rotation_speed = get_parameter("rotation_speed").as_int();
                    _sample_rate = get_parameter("sample_rate").as_int();
 
-  RCLCPP_INFO(get_logger(), "node config:\n  port : %s\n  speed: %d Hz\n  rate : %d Hz\n  frame: %s", serial_port.c_str(), _rotation_speed, _sample_rate, _frame_id.c_str());
+  RCLCPP_INFO(get_logger(),
+              "node config:\n  topic: %s\n  port : %s\n  speed: %d Hz\n  rate : %d Hz\n  frame: %s",
+              topic.c_str(), serial_port.c_str(), _rotation_speed, _sample_rate, _frame_id.c_str());
 
   _scanner = std::make_shared<sweep::sweep>(serial_port.c_str());
 
-  _lidar_pub = create_publisher<sensor_msgs::msg::LaserScan>(_frame_id, 10);
+  _lidar_pub = create_publisher<sensor_msgs::msg::LaserScan>(topic, 10);
 
   _scanner_thread = std::thread([this]() { this->scannerThreadFunc(); });
 }
