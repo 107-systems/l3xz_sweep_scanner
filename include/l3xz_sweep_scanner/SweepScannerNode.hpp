@@ -31,14 +31,16 @@ public:
 
 private:
   rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr _lidar_pub;
-  rclcpp::TimerBase::SharedPtr _lidar_pub_timer;
-  
-  std::shared_ptr<sweep::sweep> _scanner;
    
   std::string _frame_id;
   int _rotation_speed, _sample_rate;
 
-  void lidarTimerCallback();
+  std::shared_ptr<sweep::sweep> _scanner;
+
+  std::thread _scanner_thread;
+  std::atomic<bool> _scanner_thread_active;
+
+  void scannerThreadFunc();
 };
 
 #endif // SWEEP_SCANNER_NODE
