@@ -10,7 +10,6 @@ endif()
 #######################################################################################
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
 find_package(sensor_msgs REQUIRED)
 #######################################################################################
 include_directories(
@@ -18,7 +17,10 @@ include_directories(
 )
 #######################################################################################
 add_subdirectory(external/libsweep/current)
-add_executable(${L3XZ_SWEEP_SCANNER_TARGET} src/node.cpp src/SweepScannerNode.cpp)
+add_executable(${L3XZ_SWEEP_SCANNER_TARGET}
+  src/node.cpp
+  src/SweepScannerNode.cpp
+)
 target_link_libraries(${L3XZ_SWEEP_SCANNER_TARGET} sweep)
 #######################################################################################
 target_compile_features(${L3XZ_SWEEP_SCANNER_TARGET} PRIVATE cxx_std_17)
