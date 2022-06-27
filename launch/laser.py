@@ -16,5 +16,12 @@ def generate_launch_description():
           {'sample_rate': 500},
           {'frame_id' : 'laser_link'}
       ]
+    ),
+    Node(package = "tf2_ros",
+         executable = "static_transform_publisher",
+         name="base_link_to_laser_link",
+         namespace='l3xz',
+         output='screen',
+         arguments = ["0.06", "0", "0.8", "0", "0", "0", "base_link", "laser_link"]
     )
   ])

@@ -16,7 +16,7 @@ colcon build
 ```bash
  . install/setup.bash
 ros2 launch l3xz_sweep_scanner laser.py
-rviz2 --display-config src/l3xz/rviz/laser.rviz
+rviz2 --display-config src/l3xz_sweep_scanner/rviz/laser.rviz
 ```
 **Note**: Possible you need to configure the right USB port in `launch`/[`laser.launch`](launch/laser.launch).
 
