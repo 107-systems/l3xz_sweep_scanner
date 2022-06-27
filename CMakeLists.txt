@@ -1,32 +1,39 @@
 #######################################################################################
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.8)
 #######################################################################################
 project(l3xz_sweep_scanner)
+set(L3XZ_SWEEP_SCANNER_TARGET ${PROJECT_NAME}_node)
 #######################################################################################
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  sensor_msgs
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Werror -Wextra -Wpedantic)
+endif()
+#######################################################################################
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+#######################################################################################
+include_directories(
+  include
 )
-#######################################################################################
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES l3xz
-#  CATKIN_DEPENDS roscpp std_msgs
-#  DEPENDS system_lib
-)
-#######################################################################################
-include_directories(${catkin_INCLUDE_DIRS})
 #######################################################################################
 add_subdirectory(external/libsweep/current)
+add_executable(${L3XZ_SWEEP_SCANNER_TARGET}
+  src/main.cpp
+  src/SweepScannerNode.cpp
+)
+target_link_libraries(${L3XZ_SWEEP_SCANNER_TARGET} sweep)
 #######################################################################################
-add_executable(${PROJECT_NAME}_node
-  src/node.cpp
+target_compile_features(${L3XZ_SWEEP_SCANNER_TARGET} PRIVATE cxx_std_17)
+ament_target_dependencies(${L3XZ_SWEEP_SCANNER_TARGET} rclcpp sensor_msgs)
+#######################################################################################
+install(TARGETS
+  ${L3XZ_SWEEP_SCANNER_TARGET}
+  DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
 )
-target_link_libraries(${PROJECT_NAME}_node
-  ${catkin_LIBRARIES}
-  pthread
-  sweep
-)
-target_compile_options(${PROJECT_NAME}_node PRIVATE -std=c++17 -Wall -Werror -pedantic)
+#######################################################################################
+ament_package()
 #######################################################################################
