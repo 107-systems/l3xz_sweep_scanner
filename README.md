@@ -2,6 +2,7 @@
 :floppy_disk: `l3xz_sweep_scanner`
 ==================================
 [![Build Status](https://github.com/107-systems/l3xz_sweep_scanner/actions/workflows/ros2.yml/badge.svg)](https://github.com/107-systems/l3xz_sweep_scanner/actions/workflows/ros2.yml)
+[![Spell Check status](https://github.com/107-systems/l3xz_sweep_scanner/actions/workflows/spell-check.yml/badge.svg)](https://github.com/107-systems/l3xz_sweep_scanner/actions/workflows/spell-check.yml)
 
 ROS driver for Scanse Sweep 360° 2D LIDAR.
 
