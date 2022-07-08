@@ -69,7 +69,7 @@ void SweepScannerNode::scannerThreadFunc() try
   _scanner->set_sample_rate(_sample_rate);
   _scanner->start_scanning();
 
-  RCLCPP_INFO(get_logger(), "starting data aquisition.");
+  RCLCPP_INFO(get_logger(), "starting data acquisition.");
 
   while (_scanner_thread_active)
   {

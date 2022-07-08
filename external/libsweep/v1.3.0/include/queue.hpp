@@ -41,14 +41,14 @@ public:
     the_cond_var.notify_one();
   }
 
-  // If the queue is empty, wait till an element is avaiable.
+  // If the queue is empty, wait till an element is available.
   T dequeue() {
     std::unique_lock<std::mutex> lock(the_mutex);
     // wait until queue is not empty
     while (the_queue.empty()) {
       // the_cond_var could wake up the thread spontaneously, even if the queue is still empty...
       // so put this wakeup inside a while loop, such that the empty check is performed whenever it wakes up
-      the_cond_var.wait(lock); // release lock as long as the wait and reaquire it afterwards.
+      the_cond_var.wait(lock); // release lock as long as the wait and reacquire it afterwards.
     }
     auto v = std::move(the_queue.front());
     the_queue.pop();

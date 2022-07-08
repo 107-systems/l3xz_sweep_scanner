@@ -83,7 +83,7 @@ static void sweep_device_wait_until_motor_ready(sweep_device_s device, sweep_err
   // (20 iterations with 500ms pause)
   for (int32_t i = 0; i < 20; ++i) {
     if (i > 0) {
-      // only check every 500ms, to avoid unecessary processing if this is executing in a dedicated thread
+      // only check every 500ms, to avoid unnecessary processing if this is executing in a dedicated thread
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 

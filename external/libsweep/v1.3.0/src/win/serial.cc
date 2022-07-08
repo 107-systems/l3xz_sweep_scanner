@@ -187,7 +187,7 @@ void device_read(device_s serial, void* to, int32_t len) {
         f_result = true;
       }
 
-      //  Reset flag so that another opertion can be issued.
+      //  Reset flag so that another operation can be issued.
       serial->waiting_on_read = false;
       break;
 
