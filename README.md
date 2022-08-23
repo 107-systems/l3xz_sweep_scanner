@@ -6,6 +6,10 @@
 
 ROS driver for Scanse Sweep 360° 2D LIDAR.
 
+<p align="center">
+  <a href="https://github.com/107-systems/l3xz"><img src="https://raw.githubusercontent.com/107-systems/.github/main/logo/l3xz-logo-memento-mori-github.png" width="30%"></a>
+</p>
+
 ### How-to-build
 ```bash
 # Clone this repository into colcon_ws/src.
