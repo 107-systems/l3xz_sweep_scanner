@@ -15,7 +15,7 @@ ROS driver for Scanse Sweep 360° 2D LIDAR.
 # Clone this repository into colcon_ws/src.
 git clone https://github.com/107-systems/l3xz_sweep_scanner
 # Invoke 'colcon build' from repository root.
-source /opt/ros/galactic/setup.bash
+source /opt/ros/humble/setup.bash
 colcon build --packages-select l3xz_sweep_scanner
 ```
 
